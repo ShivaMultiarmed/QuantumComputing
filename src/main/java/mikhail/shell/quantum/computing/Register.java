@@ -1,7 +1,5 @@
 package mikhail.shell.quantum.computing;
 
-import java.util.IllegalFormatException;
-
 public class Register extends Vector {
     public Register(double K, double[] V) {
         super(K, V);
@@ -15,18 +13,17 @@ public class Register extends Vector {
         builder.append(K+"(");
 
         for (int i = 0; i < M.length; i++)
-        {
             if (M[i][0]==1)
             {
                 if (i!=0)
                     builder.append('+');
                 builder.append("|" + MathUtils.intToBinaryString(i, qubitsNumber) + ">");
             }
-
-        }
-
-
         builder.append(")");
         return builder.toString();
+    }
+    public Register matrixToRegister(Matrix m)
+    {
+        return new Register(1, m.M[0]);
     }
 }
