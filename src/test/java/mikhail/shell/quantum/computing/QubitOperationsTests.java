@@ -39,4 +39,12 @@ public class QubitOperationsTests {
         final Matrix real = h.product(q);
         Assertions.assertEquals(expected, real);
     }
+    @Test
+    void testCreatingRegister()
+    {
+        final String expected = 1/Math.sqrt(2) + "(|00>+|10>)";
+        final Register register = new Register(1/Math.sqrt(2), new double[]{1, 0, 1, 0});
+        final String real = register.toString();
+        Assertions.assertEquals(expected, real);
+    }
 }

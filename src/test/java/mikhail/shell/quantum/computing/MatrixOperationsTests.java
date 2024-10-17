@@ -65,4 +65,10 @@ public class MatrixOperationsTests {
         double[][] result = tensorProduct(matrixA, matrixB);
         System.out.println(result);
     }
+    @Test
+    void creatingCNOT()
+    {
+        Matrix result = Matrix.controlledMatrix(Matrix.NOT);
+        assertNotNull(result);
+    }
 }
