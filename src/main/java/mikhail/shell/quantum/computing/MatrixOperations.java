@@ -37,18 +37,5 @@ public class MatrixOperations {
         }
         return  result;
     }
-    public Matrix matrixProduct(Matrix A, Matrix B) {
-        return new Matrix(A.K * B.K, product(A.M, B.M));
-    }
-    public Matrix tensorMatrixProduct(Matrix A, Matrix B)
-    {
-        return new Matrix(A.K * B.K, tensorProduct(A.M, B.M));
-    }
-    public static double[][] vectorToMatrix(double[] V)
-    {
-        final double[][] matrix = new double[V.length][1];
-        for (int i = 0; i< matrix.length;i++)
-            matrix[i][0] = V[i];
-        return matrix;
-    }
+
 }

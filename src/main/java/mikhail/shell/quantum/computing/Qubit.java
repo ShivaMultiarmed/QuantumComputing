@@ -5,4 +5,8 @@ public class Qubit extends Vector{
     {
         super(K, new double[] {a, b});
     }
+    public static Qubit matrixToQubit(Matrix m)
+    {
+        return new Qubit(m.K, m.M[0][0], m.M[1][0]);
+    }
 }
