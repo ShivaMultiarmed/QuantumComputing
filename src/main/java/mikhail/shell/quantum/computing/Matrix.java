@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 
 public class Matrix {
-    public final double K;
+    public double K;
     public final double[][] M;
     public Matrix(double K, double[][] M)
     {
@@ -28,7 +28,9 @@ public class Matrix {
     public Matrix tensorProduct(Matrix other) {
         return new Matrix(K * other.K, MatrixOperations.tensorProduct(M, other.M));
     }
-    public static Matrix NOT = new Matrix(1, new double[][]{{0.0,1.0},{1.0,0.0}});
+    public static Matrix not() {
+        return new Matrix(1, new double[][]{{0.0,1.0},{1.0,0.0}});
+    }
     public static Matrix identityMatrix(int n)
     {
         final double[][] result = new double[n][n];

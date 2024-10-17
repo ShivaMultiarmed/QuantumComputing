@@ -15,7 +15,7 @@ public class Register extends Vector {
         for (int i = 0; i < M.length; i++)
             if (M[i][0]==1)
             {
-                if (i!=0)
+                if (builder.charAt(builder.length()-1) != '(')
                     builder.append('+');
                 builder.append("|" + MathUtils.intToBinaryString(i, qubitsNumber) + ">");
             }

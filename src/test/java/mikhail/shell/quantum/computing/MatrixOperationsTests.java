@@ -68,7 +68,7 @@ public class MatrixOperationsTests {
     @Test
     void creatingCNOT()
     {
-        Matrix result = Matrix.controlledMatrix(Matrix.NOT);
+        Matrix result = Matrix.controlledMatrix(Matrix.not());
         assertNotNull(result);
     }
 }

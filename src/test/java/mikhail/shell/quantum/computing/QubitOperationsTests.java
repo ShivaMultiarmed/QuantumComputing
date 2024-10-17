@@ -47,4 +47,15 @@ public class QubitOperationsTests {
         final String real = register.toString();
         Assertions.assertEquals(expected, real);
     }
+    @Test
+    void testObserving()
+    {
+        final Observer observer = new Observer();
+        for (int i =0; i<10; i++)
+        {
+            Qubit q = Qubit.superPosPlus();
+            observer.observe(q);
+            System.out.println(q);
+        }
+    }
 }
