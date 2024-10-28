@@ -12,4 +12,8 @@ public class MathUtils {
             builder.insert(0, '0');
         return builder.toString();
     }
+    public static String doubleToBinaryString(double x, int digitNum)
+    {
+        return intToBinaryString((int) x, digitNum);
+    }
 }
