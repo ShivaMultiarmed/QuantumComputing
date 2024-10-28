@@ -2,7 +2,6 @@ package mikhail.shell.quantum.computing;
 
 import java.util.*;
 
-import static mikhail.shell.quantum.computing.MathUtils.doubleToBinaryString;
 import static mikhail.shell.quantum.computing.MathUtils.intToBinaryString;
 
 public class Observer {
@@ -20,6 +19,11 @@ public class Observer {
         q.M[1][0] = (state) ? 1 : 0;
         q.K = 1.0;
         return q.M[0][0] == 0 ? 1 : 0;
+    }
+    public int observeH(Qubit q)
+    {
+        q = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
+        return observe(q);
     }
     public void observe(Register r)
     {

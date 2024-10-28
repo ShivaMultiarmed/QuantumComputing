@@ -47,6 +47,10 @@ public class Matrix {
                 result[i][j] = 0;
         return new Matrix(1, result);
     }
+    public static Matrix hadamardMatrix()
+    {
+        return new Matrix(1/Math.sqrt(2), new double[][]{ {1,1}, {1, -1} });
+    }
     public static Matrix controlledMatrix(Matrix m)
     {
         final int d = m.M.length; // сторона старой матрицы

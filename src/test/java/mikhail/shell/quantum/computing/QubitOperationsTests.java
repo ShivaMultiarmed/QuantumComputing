@@ -53,8 +53,8 @@ public class QubitOperationsTests {
         final Observer observer = new Observer();
         for (int i =0; i<10; i++)
         {
-            Qubit q = Qubit.superPosPlus();
-            observer.observe(q);
+            Qubit q = Qubit.superPosMinus();
+            int s = observer.observeH(q);
             System.out.println(q);
         }
     }

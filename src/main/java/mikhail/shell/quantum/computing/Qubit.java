@@ -19,6 +19,6 @@ public class Qubit extends Register{
         return new Qubit(1/Math.sqrt(2), 1,1);
     }
     public static Qubit superPosMinus() {
-        return new Qubit(1/Math.sqrt(2), 1,1);
+        return new Qubit(1/Math.sqrt(2), 1,-1);
     }
 }
