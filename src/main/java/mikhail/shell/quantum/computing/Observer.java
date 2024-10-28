@@ -22,7 +22,9 @@ public class Observer {
     }
     public int observeH(Qubit q)
     {
-        q = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
+        Qubit qH = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
+        q.K = qH.K;
+        q.M = qH.M;
         return observe(q);
     }
     public void observe(Register r)

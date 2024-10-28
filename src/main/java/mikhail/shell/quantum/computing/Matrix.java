@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Matrix {
     public double K;
-    public final double[][] M;
+    public double[][] M;
     public Matrix(double K, double[][] M)
     {
         this.K = K;
