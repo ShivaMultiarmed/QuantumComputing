@@ -17,6 +17,11 @@ public class ProtocolTests {
     void testSendingAndReceiving()
     {
         sender.generateAndSendKey(receiver, 10);
+        for (Qubit q : sender.key)
+            System.out.print(q + " ");
+        System.out.println();
+        for (Qubit q : receiver.key)
+            System.out.print(q + " ");
         Assertions.assertIterableEquals(sender.key, receiver.key);
     }
 }

@@ -18,17 +18,21 @@ public class Sender {
             q = Qubit.one();
         if (basis == 1)
             q = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
+        System.out.println("Сгенерирован кубит " + q);
         return q;
     }
     private int generateBasis()
     {
         // 0 для базиса |0>, |1>;
         // 1 для базиса |0>', |1>'
-
-        return randomFraction() < 0.5 ? 0 : 1;
+        boolean isBasic = randomFraction() < 0.5;
+        final int basis = isBasic ? 0 : 1;
+        System.out.println("Сгенерирован " + (isBasic ? "нормальный" : "повёрнутый") + " базис");
+        return basis;
     }
     public int sendQubit(Receiver receiver, Qubit qubit)
     {
+        System.out.println("Отправляю кубит " + qubit);
         return receiver.receive(qubit);
     }
     public void generateAndSendKey(Receiver receiver, int length)
@@ -39,12 +43,15 @@ public class Sender {
             observerTypes.clear();
         for (int i = 0; i < length; i++)
         {
-            int basis;
+            int basis, receiverBasis;
             Qubit q;
             do {
                 basis = generateBasis();
                 q = generateQubit(basis);
-            } while (basis != sendQubit(receiver, q));
+                receiverBasis = sendQubit(receiver, q);
+                if (basis != receiverBasis)
+                    System.out.println("Запрос на повтор");
+            } while (basis != receiverBasis);
             receiver.getApproval();
             key.add(q);
             observerTypes.add(basis);
