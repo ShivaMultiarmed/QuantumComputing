@@ -1,5 +1,6 @@
 package mikhail.shell.quantum.computing;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,6 @@ public class ProtocolTests {
     void testSendingAndReceiving()
     {
         sender.generateAndSendKey(receiver, 10);
-        System.out.println();
+        Assertions.assertIterableEquals(sender.key, receiver.key);
     }
 }

@@ -6,9 +6,9 @@ import java.util.LinkedList;
 import static mikhail.shell.quantum.computing.MathUtils.randomFraction;
 
 public class Sender {
-    private final LinkedList<Qubit> key = new LinkedList<>();
-    private final LinkedList<Boolean> observerTypes = new LinkedList<>();
-    private Qubit generateQubit(boolean isBasic)
+    public final LinkedList<Qubit> key = new LinkedList<>();
+    private final LinkedList<Integer> observerTypes = new LinkedList<>();
+    private Qubit generateQubit(int basis)
     {
         double p = randomFraction();
         Qubit q;
@@ -16,15 +16,18 @@ public class Sender {
             q = Qubit.zero();
         else
             q = Qubit.one();
-        if (!isBasic)
+        if (basis == 1)
             q = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
         return q;
     }
-    private boolean generateBasis()
+    private int generateBasis()
     {
-        return randomFraction() < 0.5; // true - |0>, |1>; false - |0>', |1>'
+        // 0 для базиса |0>, |1>;
+        // 1 для базиса |0>', |1>'
+
+        return randomFraction() < 0.5 ? 0 : 1;
     }
-    public boolean sendQubit(Receiver receiver, Qubit qubit)
+    public int sendQubit(Receiver receiver, Qubit qubit)
     {
         return receiver.receive(qubit);
     }
@@ -36,15 +39,15 @@ public class Sender {
             observerTypes.clear();
         for (int i = 0; i < length; i++)
         {
-            boolean isBasic;
+            int basis;
             Qubit q;
             do {
-                isBasic = generateBasis();
-                q = generateQubit(isBasic);
-            } while (isBasic != sendQubit(receiver, q));
+                basis = generateBasis();
+                q = generateQubit(basis);
+            } while (basis != sendQubit(receiver, q));
             receiver.getApproval();
             key.add(q);
-            observerTypes.add(isBasic);
+            observerTypes.add(basis);
         }
     }
 }

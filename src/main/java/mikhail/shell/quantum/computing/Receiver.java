@@ -8,10 +8,10 @@ import static mikhail.shell.quantum.computing.MathUtils.randomFraction;
 public class Receiver {
     private Qubit currentQubit;
     private boolean isCurrentBasisBasic;
-    private final LinkedList<Qubit> key = new LinkedList<>();
+    public final LinkedList<Qubit> key = new LinkedList<>();
     private final LinkedList<Boolean> observerTypes = new LinkedList<>();
     private final Observer observer = new Observer();
-    public boolean receive(Qubit q)
+    public int receive(Qubit q)
     {
         final double p = randomFraction();
         final boolean isBasic = p < 0.5;
@@ -21,7 +21,7 @@ public class Receiver {
             observer.observeH(q);
         currentQubit = q;
         isCurrentBasisBasic = isBasic;
-        return isBasic;
+        return isBasic ? 0 : 1;
     }
     public void getApproval()
     {
