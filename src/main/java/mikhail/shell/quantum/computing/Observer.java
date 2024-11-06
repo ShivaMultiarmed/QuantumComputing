@@ -3,13 +3,9 @@ package mikhail.shell.quantum.computing;
 import java.util.*;
 
 import static mikhail.shell.quantum.computing.MathUtils.intToBinaryString;
+import static mikhail.shell.quantum.computing.MathUtils.randomFraction;
 
 public class Observer {
-    private final static Random random = new Random();
-    private static double randomFraction()
-    {
-        return random.nextDouble(0,1);
-    }
     public int observe(Qubit q)
     {
         final double a = q.K * q.M[0][0], b = q.K * q.M[1][0];

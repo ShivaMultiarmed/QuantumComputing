@@ -11,7 +11,6 @@ public class Matrix {
         this.K = K;
         this.M = M;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Matrix))

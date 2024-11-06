@@ -9,6 +9,7 @@ public class RegisterOperationsTests {
     {
         Register register = new Register(1/Math.sqrt(2), new double[]{ 0.0, 0.0, 1.0, 1.0});
         Observer observer = new Observer();
+        System.out.println(register);
         observer.observe(register);
         System.out.println(register);
     }
@@ -16,9 +17,9 @@ public class RegisterOperationsTests {
     void testObservingQubitInRegister()
     {
         Register register = new Register(1/Math.sqrt(3), new double[]{ 1.0, 1.0, 0, 1.0 });
+        System.out.println(register);
         Observer observer = new Observer();
         observer.observeQubitInRegister(register, 1);
-        // observer.observeQubitInRegister(register, 0);
         System.out.println(register);
     }
     @Test
