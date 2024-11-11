@@ -29,6 +29,6 @@ public class Receiver {
     {
         key.add(currentQubit);
         observerTypes.add(isCurrentBasisBasic);
-        System.out.println("Подтверждён кубит " + currentQubit);
+        System.out.println("ОК");
     }
 }

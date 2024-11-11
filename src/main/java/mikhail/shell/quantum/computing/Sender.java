@@ -50,7 +50,7 @@ public class Sender {
                 q = generateQubit(basis);
                 receiverBasis = sendQubit(receiver, q);
                 if (basis != receiverBasis)
-                    System.out.println("Запрос на повтор");
+                    System.out.println("ПОВТОР");
             } while (basis != receiverBasis);
             receiver.getApproval();
             key.add(q);
