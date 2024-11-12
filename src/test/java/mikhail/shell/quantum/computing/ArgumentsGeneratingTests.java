@@ -22,24 +22,27 @@ public class ArgumentsGeneratingTests {
         Assertions.assertNotNull(real);
     }
     @Test
-    void testAddingArgument()
+    void testQubitBooleanFunction()
     {
-        int[] r = {0, 0, 0, 1};
-        converter = new MatrixToFunctionConverter();
-        double[][] result = converter.generateResultMatrixAsArray(r);
-        Assertions.assertNotNull(result);
+        final int[] r = {0,0,0,1};
+        var converter = new MatrixToFunctionConverter();
+        final Matrix f = converter.generateFunctionMatrix(r);
+        final Qubit q1 = Qubit.zero(), q2 = Qubit.one(), q3 = Qubit.zero();
+        final Register register = Register.matrixToRegister(q1.tensorProduct(q2).tensorProduct(q3));
+        final Register resultRegister = Register.matrixToRegister(f.product(register));
+        Assertions.assertNotNull(resultRegister);
     }
 
     @Test
     void t()
     {
-        final int[] r1 = {1,1,0,1};//, r2 = {0,1,0,1};
+        final int[] r1 = {0,1,1,0}, r2 = {0,1,0,1};
         var converter = new MatrixToFunctionConverter();
         final Matrix f1 = converter.generateFunctionMatrix(r1);
-        //final Matrix f2 = converter.generateFunctionMatrix(r2);
-        //final Matrix f = f1.tensorProduct(f2);
+        final Matrix f2 = converter.generateFunctionMatrix(r2);
+        final Matrix f = f1.product(f2);
         Assertions.assertNotNull(f1);
-        //Assertions.assertNotNull(f2);
-        //Assertions.assertNotNull(f);
+        Assertions.assertNotNull(f2);
+        Assertions.assertNotNull(f);
     }
 }

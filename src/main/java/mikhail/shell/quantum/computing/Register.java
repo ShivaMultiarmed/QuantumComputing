@@ -1,5 +1,6 @@
 package mikhail.shell.quantum.computing;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,9 +57,10 @@ public class Register extends Vector {
         builder.append(")");
         return builder.toString();
     }
-    public Register matrixToRegister(Matrix m)
+    public static Register matrixToRegister(Matrix m)
     {
-        return new Register(1, m.M[0]);
+        final double[] r = Arrays.stream(m.M).mapToDouble(row -> row[0]).toArray();
+        return new Register(1, r);
     }
     public int qubitsNumber()
     {
