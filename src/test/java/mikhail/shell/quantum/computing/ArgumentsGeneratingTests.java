@@ -25,8 +25,21 @@ public class ArgumentsGeneratingTests {
     void testAddingArgument()
     {
         int[] r = {0, 0, 0, 1};
-        converter = new MatrixToFunctionConverter(r);
-        double[][] result = converter.generateResultMatrix();
+        converter = new MatrixToFunctionConverter();
+        double[][] result = converter.generateResultMatrixAsArray(r);
         Assertions.assertNotNull(result);
+    }
+
+    @Test
+    void t()
+    {
+        final int[] r1 = {1,1,0,1};//, r2 = {0,1,0,1};
+        var converter = new MatrixToFunctionConverter();
+        final Matrix f1 = converter.generateFunctionMatrix(r1);
+        //final Matrix f2 = converter.generateFunctionMatrix(r2);
+        //final Matrix f = f1.tensorProduct(f2);
+        Assertions.assertNotNull(f1);
+        //Assertions.assertNotNull(f2);
+        //Assertions.assertNotNull(f);
     }
 }
