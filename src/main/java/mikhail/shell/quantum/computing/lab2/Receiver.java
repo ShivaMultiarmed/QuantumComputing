@@ -1,4 +1,7 @@
-package mikhail.shell.quantum.computing;
+package mikhail.shell.quantum.computing.lab2;
+
+import mikhail.shell.quantum.computing.Observer;
+import mikhail.shell.quantum.computing.Qubit;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,5 +1,7 @@
 package mikhail.shell.quantum.computing;
 
+import mikhail.shell.quantum.computing.lab2.Receiver;
+import mikhail.shell.quantum.computing.lab2.Sender;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
