@@ -1,5 +1,6 @@
 package mikhail.shell.quantum.computing;
 
+import mikhail.shell.quantum.computing.lab3.RemainderCalculator;
 import mikhail.shell.quantum.computing.lab3.SimpleFunctionMatrix;
 import mikhail.shell.quantum.computing.lab3.FunctionOperations;
 import mikhail.shell.quantum.computing.lab3.MatrixToFunctionConverter;
@@ -43,5 +44,17 @@ public class ArgumentsGeneratingTests {
         final Matrix f = converter.generateFunctionMatrix(r);
         final Qubit q1 = Qubit.zero(), q2 = Qubit.one(), q3 = Qubit.zero(), q4 = Qubit.zero();
         Assertions.assertNotNull(f);
+    }
+
+    @Test
+    void evaluateRemainder()
+    {
+        int x = 2;
+        int m = 5;
+        int a = 2;
+        final RemainderCalculator calculator = new RemainderCalculator(a, m);
+        int expected = 4;
+        int real = calculator.evaluateRemainder(x);
+        Assertions.assertEquals(expected, real);
     }
 }

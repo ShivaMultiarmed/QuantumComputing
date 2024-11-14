@@ -23,4 +23,21 @@ public class MathUtils {
     {
         return intToBinaryString((int) x, digitNum);
     }
+    public static int[] intToBinaryArray(int x)
+    {
+        final int num = MatrixOperations.getQubitDigits(x);
+        final int[] arr = new int[num];
+        for (int i = num - 1; i >= 0; i--) {
+            arr[i] = x % 2;
+            x /= 2;
+        }
+        return arr;
+    }
+    public static int binaryArrayToInt(int a[])
+    {
+        int r = 0;
+        for (int i = 0; i< a.length; i++)
+            r += (int) (a[a.length - 1 - i] * Math.pow(2, i));
+        return r;
+    }
 }

@@ -37,4 +37,8 @@ public class MatrixOperations {
         }
         return  result;
     }
+    public static int getQubitDigits(final int x)
+    {
+        return 1 + (int) MathUtils.log(2, x);
+    }
 }
