@@ -27,7 +27,7 @@ public class RemainderCalculator {
                 r /= 2;
             }
         }
-        f = new SimpleFunctionMatrix(argumentsQubitsNumber, functions);
+        f = new MatrixToFunctionConverter().generateFunctionMatrix(argumentsQubitsNumber, functions);
     }
     private int getRemainder(final int x)
     {
@@ -61,10 +61,14 @@ public class RemainderCalculator {
             m = m.tensorProduct(row[i]);
         final Register register = Register.matrixToRegister(m);
         final Register newRegister = Register.matrixToRegister(f.product(register));
-        final int[] array = Arrays.stream(newRegister.M)
-                .mapToInt(numbers -> (int) numbers[0])
-                .skip(argumentsRow.length - 1)
-                .toArray();
-        return MathUtils.binaryArrayToInt(array);
+        int decimalResult = 0;
+        for (int i = 0; i < newRegister.M.length; i++) {
+            if (newRegister.M[i][0] == 1)
+            {
+                decimalResult = i;
+                break;
+            }
+        }
+        return decimalResult & (int) (Math.pow(2, remainderQubitsNum) - 1);
     }
 }

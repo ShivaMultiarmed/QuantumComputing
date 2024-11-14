@@ -8,8 +8,11 @@ import java.util.Arrays;
 public class MatrixToFunctionConverter {
     public double[][] generateResultMatrixAsArray(final int[][] r)
     {
-        final Matrix initialMatrix = new SimpleFunctionMatrix(r);
-        final int oldArgsNumber = (int) MathUtils.log(2, r.length);
+        return generateResultMatrixAsArray((int) MathUtils.log(2, r.length), r);
+    }
+    public double[][] generateResultMatrixAsArray(final int oldArgsNumber, final int[][] r)
+    {
+        final Matrix initialMatrix = new SimpleFunctionMatrix(oldArgsNumber, r);
         final int funsNumber = r[0].length;
         final int newArgsNumber = oldArgsNumber + funsNumber;
         final double[][] intermediateResult = FunctionOperations.generateDoubleArguments(newArgsNumber);
@@ -30,6 +33,10 @@ public class MatrixToFunctionConverter {
     public Matrix generateFunctionMatrix(final int[][] r)
     {
         return new Matrix(1, generateResultMatrixAsArray(r));
+    }
+    public Matrix generateFunctionMatrix(final int argsNumber, final int[][] r)
+    {
+        return new Matrix(1, generateResultMatrixAsArray(argsNumber,r));
     }
 
     private int getF(double[][] result, int i, int newArgsNumber, final Matrix initialMatrix, final int oldArgsNumber, final int colIndex) {
