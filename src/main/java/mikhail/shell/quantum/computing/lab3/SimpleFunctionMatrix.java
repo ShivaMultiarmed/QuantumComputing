@@ -4,12 +4,9 @@ import mikhail.shell.quantum.computing.MathUtils;
 import mikhail.shell.quantum.computing.Matrix;
 
 public class SimpleFunctionMatrix extends Matrix {
-    public SimpleFunctionMatrix(int[][] results) {
-        this((int) MathUtils.log(2, results.length), results);
-    }
     public SimpleFunctionMatrix(final int argsNumber, int[][] results)
     {
-        this((int) MathUtils.log(2, results.length), results.length, results);
+        this(argsNumber, (int) Math.pow(2, argsNumber), results);
     }
     public SimpleFunctionMatrix(final int argsNumber, final int rowsNumber, int[][] results)
     {

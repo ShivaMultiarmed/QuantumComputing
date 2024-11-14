@@ -5,11 +5,9 @@ import mikhail.shell.quantum.computing.Matrix;
 import java.util.Arrays;
 
 public class FunctionOperations {
-
     public static int[][] generateArguments(final int argsNumber) {
         return generateArguments(argsNumber, (int) Math.pow(2, argsNumber));
     }
-    // x1, x2, y
     public static int[][] generateArguments(final int argsNumber, final int rowsNumber)
     {
         final int[][] args = new int[rowsNumber][argsNumber];

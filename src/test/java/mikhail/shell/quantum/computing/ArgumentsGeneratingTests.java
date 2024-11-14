@@ -39,11 +39,11 @@ public class ArgumentsGeneratingTests {
     @Test
     void testMultipleFunction()
     {
-//        final int[][] r = {{0,0},{1,1},{1,0},{0,1}};
-//        var converter = new MatrixToFunctionConverter();
-//        final Matrix f = converter.generateFunctionMatrix(r);
-//        final Qubit q1 = Qubit.zero(), q2 = Qubit.one(), q3 = Qubit.zero(), q4 = Qubit.zero();
-//        Assertions.assertNotNull(f);
+        final int[][] r = {{0,0},{1,1},{1,0},{0,1}};
+        var converter = new MatrixToFunctionConverter();
+        final Matrix f = converter.generateFunctionMatrix(r);
+        final Qubit q1 = Qubit.zero(), q2 = Qubit.one(), q3 = Qubit.zero(), q4 = Qubit.zero();
+        Assertions.assertNotNull(f);
     }
 
     @Test
