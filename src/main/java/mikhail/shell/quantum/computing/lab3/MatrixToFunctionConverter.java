@@ -2,6 +2,7 @@ package mikhail.shell.quantum.computing.lab3;
 
 import mikhail.shell.quantum.computing.MathUtils;
 import mikhail.shell.quantum.computing.Matrix;
+import mikhail.shell.quantum.computing.MatrixOperations;
 
 import java.util.Arrays;
 
@@ -12,14 +13,18 @@ public class MatrixToFunctionConverter {
     }
     public double[][] generateResultMatrixAsArray(final int oldArgsNumber, final int[][] r)
     {
-        final Matrix initialMatrix = new SimpleFunctionMatrix(oldArgsNumber, r);
+        return generateResultMatrixAsArray(oldArgsNumber, (int) Math.pow(2, oldArgsNumber), r);
+    }
+    public double[][] generateResultMatrixAsArray(final int oldArgsNumber, final int rowsNumber, final int[][] r)
+    {
+        final Matrix initialMatrix = new SimpleFunctionMatrix(oldArgsNumber, rowsNumber, r);
         final int funsNumber = r[0].length;
         final int newArgsNumber = oldArgsNumber + funsNumber;
-        final double[][] intermediateResult = FunctionOperations.generateDoubleArguments(newArgsNumber);
+        final double[][] intermediateResult = FunctionOperations.generateDoubleArguments(newArgsNumber, (int) Math.pow(2, newArgsNumber));
         final int resultMatrixSize = (int) Math.pow(2, newArgsNumber);
         final double [][] resultMatrix = new double[resultMatrixSize][resultMatrixSize];
         for (int rowIndex = 0; rowIndex < intermediateResult.length; rowIndex++) { // проходим по каждой строке
-            for (int colIndex = oldArgsNumber; colIndex < newArgsNumber; colIndex++)
+            for (int colIndex = oldArgsNumber; colIndex < intermediateResult[rowIndex].length; colIndex++)
             {
                 int y = (int) intermediateResult[rowIndex][colIndex];
                 int f = getF(intermediateResult, rowIndex, newArgsNumber, initialMatrix, oldArgsNumber, colIndex);
@@ -32,13 +37,17 @@ public class MatrixToFunctionConverter {
     }
     public Matrix generateFunctionMatrix(final int[][] r)
     {
-        return new Matrix(1, generateResultMatrixAsArray(r));
+        final int argsNumber = MatrixOperations.getQubitDigits(r.length);
+        return generateFunctionMatrix(argsNumber, r.length, r);
     }
     public Matrix generateFunctionMatrix(final int argsNumber, final int[][] r)
     {
-        return new Matrix(1, generateResultMatrixAsArray(argsNumber,r));
+        return generateFunctionMatrix(argsNumber, (int) Math.pow(2, argsNumber), r);
     }
-
+    public Matrix generateFunctionMatrix(final int argsNumber, final int rowsNumber, final int[][] r)
+    {
+        return new Matrix(1, generateResultMatrixAsArray(argsNumber,rowsNumber,r));
+    }
     private int getF(double[][] result, int i, int newArgsNumber, final Matrix initialMatrix, final int oldArgsNumber, final int colIndex) {
         int k = 0; // выбирает строку из изначальной матрицы чтобы вычислить f
         int j;

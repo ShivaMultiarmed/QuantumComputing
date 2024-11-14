@@ -17,11 +17,12 @@ public class RemainderCalculator {
         final int[] remainders = evaluateRemainders();
         final int qubitsNumberForRemainder = MatrixOperations.getQubitDigits(m);
 
-        int maxArgument = remainders[remainders.length - 1];
+        int maxArgument = remainders.length - 1;
         int argumentsQubitsNumber = MatrixOperations.getQubitDigits(maxArgument);
-        final int[][] functions = new int[maxArgument + 1][qubitsNumberForRemainder];
-        for (int i = 0; i < functions.length; i++) {
-            int r = remainders[i];
+        final int rowsNumber = remainders.length;
+        final int[][] functions = new int[rowsNumber][qubitsNumberForRemainder];
+        for (int i = 0; i < rowsNumber; i++) {
+            int r = remainders[i % remainders.length];
             for (int j = functions[i].length - 1; j >= 0; j--) {
                 functions[i][j] = r % 2;
                 r /= 2;
