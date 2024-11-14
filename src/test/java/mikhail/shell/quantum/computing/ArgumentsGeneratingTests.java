@@ -49,11 +49,22 @@ public class ArgumentsGeneratingTests {
     @Test
     void evaluateRemainder()
     {
+//        int x = 4;
+//        int m = 21;
+//        int a = 5;
+//        int expected = 16;
+
+//        int x = 2;
+//        int m = 15;
+//        int a = 7;
+//        int expected = 4;
+
         int x = 3;
-        int m = 7;
-        int a = 6;
+        int m = 33;
+        int a = 9;
+        int expected = 3;
+
         final RemainderCalculator calculator = new RemainderCalculator(a, m);
-        int expected = 6;
         int real = calculator.evaluateRemainder(x);
         Assertions.assertEquals(expected, real);
     }
