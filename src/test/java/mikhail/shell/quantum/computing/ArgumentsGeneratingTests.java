@@ -51,7 +51,7 @@ public class ArgumentsGeneratingTests {
     {
         int x = 3;
         int m = 7;
-        int a = 3;
+        int a = 6;
         final RemainderCalculator calculator = new RemainderCalculator(a, m);
         int expected = 6;
         int real = calculator.evaluateRemainder(x);

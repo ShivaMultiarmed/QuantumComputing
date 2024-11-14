@@ -18,7 +18,6 @@ public class RemainderCalculator {
         final int[] remainders = evaluateRemainders();
         final int qubitsNumberForRemainder = MatrixOperations.getQubitDigits(m);
 
-
         maxArgument = remainders.length - 1;
         int argumentsQubitsNumber = MatrixOperations.getQubitDigits(maxArgument);
         final int rowsNumber = remainders.length;
