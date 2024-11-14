@@ -23,9 +23,9 @@ public class MathUtils {
     {
         return intToBinaryString((int) x, digitNum);
     }
-    public static int[] intToBinaryArray(int x)
+    public static int[] intToBinaryArray(int x, int num)
     {
-        final int num = MatrixOperations.getQubitDigits(x);
+        //final int num = MatrixOperations.getQubitDigits(x);
         final int[] arr = new int[num];
         for (int i = num - 1; i >= 0; i--) {
             arr[i] = x % 2;

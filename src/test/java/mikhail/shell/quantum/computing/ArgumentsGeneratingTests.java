@@ -49,7 +49,7 @@ public class ArgumentsGeneratingTests {
     @Test
     void evaluateRemainder()
     {
-        int x = 2;
+        int x = 3;
         int m = 7;
         int a = 3;
         final RemainderCalculator calculator = new RemainderCalculator(a, m);

@@ -9,6 +9,7 @@ import java.util.List;
 public class RemainderCalculator {
     private final int a, m;
     private final Matrix f;
+    private int maxArgument;
 
     public RemainderCalculator(final int a, final int m)
     {
@@ -17,7 +18,8 @@ public class RemainderCalculator {
         final int[] remainders = evaluateRemainders();
         final int qubitsNumberForRemainder = MatrixOperations.getQubitDigits(m);
 
-        int maxArgument = remainders.length - 1;
+
+        maxArgument = remainders.length - 1;
         int argumentsQubitsNumber = MatrixOperations.getQubitDigits(maxArgument);
         final int rowsNumber = remainders.length;
         final int[][] functions = new int[rowsNumber][qubitsNumberForRemainder];
@@ -47,7 +49,7 @@ public class RemainderCalculator {
     }
     public int evaluateRemainder(final int x)
     {
-        final int[] argumentsRow = MathUtils.intToBinaryArray(x);
+        final int[] argumentsRow = MathUtils.intToBinaryArray(x, MatrixOperations.getQubitDigits(maxArgument));
         final int remainderQubitsNum = MatrixOperations.getQubitDigits(m - 1);
         final Qubit[] row = new Qubit[argumentsRow.length + remainderQubitsNum];
         for (int i = 0; i < row.length; i++)

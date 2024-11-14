@@ -49,16 +49,18 @@ public class MatrixToFunctionConverter {
         int j;
         for (j = 0; j < oldArgsNumber; j++) // проходим по каждому аргументу
         {
-            while (k <= initialMatrix.M.length)
+            while (k < initialMatrix.M.length)
             {
                 if (initialMatrix.M[k][j] == result[i][j])
                     break;
                 // нашли искомую строку с результатом, где все аргументы соответвуют
-                else if (j < oldArgsNumber - 1)
+                else
                     k++;
                 // иначе берём следующую строку
             }
         }
+        if (k == initialMatrix.M.length)
+            k--;
         return (int) initialMatrix.M[k][colIndex];
     }
 
