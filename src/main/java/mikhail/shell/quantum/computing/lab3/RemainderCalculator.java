@@ -28,7 +28,7 @@ public class RemainderCalculator {
                 r /= 2;
             }
         }
-        f = new MatrixToFunctionConverter().generateFunctionMatrix(argumentsQubitsNumber, functions);
+        f = new MatrixToFunctionConverter().generateFunctionMatrix(argumentsQubitsNumber, rowsNumber, functions);
     }
     private int getRemainder(final int x)
     {

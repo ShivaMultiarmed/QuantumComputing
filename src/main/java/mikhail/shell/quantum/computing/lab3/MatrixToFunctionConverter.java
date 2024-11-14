@@ -7,10 +7,13 @@ import mikhail.shell.quantum.computing.MatrixOperations;
 import java.util.Arrays;
 
 public class MatrixToFunctionConverter {
-
     public double[][] generateResultMatrixAsArray(final int oldArgsNumber, final int[][] r)
     {
-        final Matrix initialMatrix = new SimpleFunctionMatrix(oldArgsNumber, r);
+        return generateResultMatrixAsArray(oldArgsNumber, (int) Math.pow(2, oldArgsNumber), r);
+    }
+    public double[][] generateResultMatrixAsArray(final int oldArgsNumber, final int rowsNumber, final int[][] r)
+    {
+        final Matrix initialMatrix = new SimpleFunctionMatrix(oldArgsNumber, rowsNumber, r);
         final int funsNumber = r[0].length;
         final int newArgsNumber = oldArgsNumber + funsNumber;
         final double[][] intermediateResult = FunctionOperations.generateDoubleArguments(newArgsNumber);
@@ -39,18 +42,21 @@ public class MatrixToFunctionConverter {
     }
     public Matrix generateFunctionMatrix(final int argsNumber, final int rowsNumber, final int[][] r)
     {
-        return new Matrix(1, generateResultMatrixAsArray(argsNumber,r));
+        return new Matrix(1, generateResultMatrixAsArray(argsNumber,rowsNumber,r));
     }
     private int getF(double[][] result, int i, int newArgsNumber, final Matrix initialMatrix, final int oldArgsNumber, final int colIndex) {
         int k = 0; // выбирает строку из изначальной матрицы чтобы вычислить f
         int j;
         for (j = 0; j < oldArgsNumber; j++) // проходим по каждому аргументу
         {
-            while (k < initialMatrix.M.length)
+            while (k <= initialMatrix.M.length)
             {
-                if (initialMatrix.M[k][j] == result[i][j]) // нашли искомую строку с результатом, где все аргументы соответвуют
+                if (initialMatrix.M[k][j] == result[i][j])
                     break;
-                k++; // иначе берём следующую строку
+                // нашли искомую строку с результатом, где все аргументы соответвуют
+                else if (j < oldArgsNumber - 1)
+                    k++;
+                // иначе берём следующую строку
             }
         }
         return (int) initialMatrix.M[k][colIndex];
