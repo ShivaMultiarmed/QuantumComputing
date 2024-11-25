@@ -9,19 +9,19 @@ import java.util.List;
 public class RemainderCalculator {
     private final int a, m;
     private final Matrix f;
-    private int maxArgument;
+    private final int argumentsQubitsNumber, remainderQubitsNum;
 
     public RemainderCalculator(final int a, final int m)
     {
         this.a = a;
         this.m = m;
         final int[] remainders = evaluateRemainders();
-        final int qubitsNumberForRemainder = MatrixOperations.getQubitDigits(m);
+        remainderQubitsNum = MatrixOperations.getQubitDigits(m);
 
-        maxArgument = remainders.length - 1;
-        int argumentsQubitsNumber = MatrixOperations.getQubitDigits(maxArgument);
+        final int maxArgument = remainders.length - 1;
+        argumentsQubitsNumber = MatrixOperations.getQubitDigits(maxArgument);
         final int rowsNumber = remainders.length;
-        final int[][] functions = new int[rowsNumber][qubitsNumberForRemainder];
+        final int[][] functions = new int[rowsNumber][remainderQubitsNum];
         for (int i = 0; i < rowsNumber; i++) {
             int r = remainders[i % remainders.length];
             for (int j = functions[i].length - 1; j >= 0; j--) {
@@ -48,21 +48,12 @@ public class RemainderCalculator {
     }
     public int evaluateRemainder(final int x)
     {
-        final int[] argumentsRow = MathUtils.intToBinaryArray(x, MatrixOperations.getQubitDigits(maxArgument));
         final int remainderQubitsNum = MatrixOperations.getQubitDigits(m - 1);
-        final Qubit[] row = new Qubit[argumentsRow.length + remainderQubitsNum];
-        for (int i = 0; i < row.length; i++)
-        {
-            if (i < argumentsRow.length)
-                row[i] = argumentsRow[i] == 0 ? Qubit.zero() : Qubit.one();
-            else
-                row[i] = Qubit.zero();
-        }
-        Matrix m = row[0];
-        for (int i = 1; i < row.length;i++)
-            m = m.tensorProduct(row[i]);
-        final Register register = Register.matrixToRegister(m);
+        final Register register = inputToRegister(x);
+        System.out.println(register);
         final Register newRegister = Register.matrixToRegister(f.product(register));
+        System.out.println(f);
+        System.out.println(newRegister);
         int decimalResult = 0;
         for (int i = 0; i < newRegister.M.length; i++) {
             if (newRegister.M[i][0] == 1)
@@ -72,5 +63,42 @@ public class RemainderCalculator {
             }
         }
         return decimalResult & (int) (Math.pow(2, remainderQubitsNum) - 1);
+    }
+    private Register inputToRegister(final int x)
+    {
+        final Qubit[] row = inputToQubitArray(x, remainderQubitsNum);
+        Matrix m = row[0];
+        for (int i = 1; i < row.length;i++)
+            m = m.tensorProduct(row[i]);
+        return Register.matrixToRegister(m);
+    }
+    public Register evaluateWholeFunction()
+    {
+        final Qubit[] row = new Qubit[argumentsQubitsNumber + remainderQubitsNum];
+        for (int i = 0; i < row.length; i++) {
+            if (i < argumentsQubitsNumber)
+                row[i] = Qubit.superPosPlus();
+            else
+                row[i] = Qubit.zero();
+        }
+        Matrix m = row[0];
+        for (int i = 1; i < row.length;i++)
+            m = m.tensorProduct(row[i]);
+        final var superPosRegister = Register.matrixToRegister(m);
+        return Register.matrixToRegister(f.product(superPosRegister));
+    }
+    private Qubit[] inputToQubitArray(final int x, final int remainderQubitsNum)
+    {
+        final int[] argumentsRow = MathUtils.intToBinaryArray(x, argumentsQubitsNumber);
+
+        final Qubit[] row = new Qubit[argumentsRow.length + remainderQubitsNum];
+        for (int i = 0; i < row.length; i++)
+        {
+            if (i < argumentsRow.length)
+                row[i] = argumentsRow[i] == 0 ? Qubit.zero() : Qubit.one();
+            else
+                row[i] = Qubit.zero();
+        }
+        return row;
     }
 }

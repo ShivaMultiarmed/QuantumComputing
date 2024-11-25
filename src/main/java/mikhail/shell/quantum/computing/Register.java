@@ -42,15 +42,15 @@ public class Register extends Vector {
         for (int i = 0; i < M.length; i++)
             if (M[i][0]!=0)
             {
-                if (builder.charAt(builder.length()-1) != '(')
+                if (builder.charAt(builder.length()-1) != '(') {
                     if (M[i][0] > 0)
                         builder.append('+');
                     else
                         builder.append('-');
-                else if (M[i][0] < 0)
+                } else if (M[i][0] < 0) {
                     builder.append('-');
-                builder
-                        .append("|")
+                }
+                builder.append("|")
                         .append(MathUtils.intToBinaryString(i, qubitsNumber()))
                         .append(">");
             }
@@ -60,7 +60,7 @@ public class Register extends Vector {
     public static Register matrixToRegister(Matrix m)
     {
         final double[] r = Arrays.stream(m.M).mapToDouble(row -> row[0]).toArray();
-        return new Register(1, r);
+        return new Register(m.K, r);
     }
     public int qubitsNumber()
     {

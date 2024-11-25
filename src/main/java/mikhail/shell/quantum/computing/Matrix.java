@@ -68,4 +68,16 @@ public class Matrix {
         }
         return new Matrix(1, result);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < M.length; i++)
+        {
+            for (int j = 0; j < M[i].length; j++)
+                stringBuilder.append(M[i][j]).append("\t");
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }
