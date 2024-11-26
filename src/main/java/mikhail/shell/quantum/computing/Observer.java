@@ -1,7 +1,5 @@
 package mikhail.shell.quantum.computing;
 
-import java.util.*;
-
 import static mikhail.shell.quantum.computing.MathUtils.intToBinaryString;
 import static mikhail.shell.quantum.computing.MathUtils.randomFraction;
 
@@ -18,7 +16,7 @@ public class Observer {
     }
     public int observeH(Qubit q)
     {
-        Qubit qH = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
+        Qubit qH = Qubit.matrixToQubit(Matrix.HadamardMatrix().product(q));
         q.K = qH.K;
         q.M = qH.M;
         return observe(q);

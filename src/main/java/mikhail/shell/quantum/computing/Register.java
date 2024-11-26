@@ -37,7 +37,8 @@ public class Register extends Vector {
     public String toString()
     {
         final StringBuilder builder = new StringBuilder();
-        builder.append(K).append("(");
+        if (K != 1)
+            builder.append(K).append("(");
 
         for (int i = 0; i < M.length; i++)
             if (M[i][0]!=0)
@@ -50,11 +51,15 @@ public class Register extends Vector {
                 } else if (M[i][0] < 0) {
                     builder.append('-');
                 }
+                if (Math.abs(M[i][0]) != 1) {
+                    builder.append(Math.abs(M[i][0]));
+                }
                 builder.append("|")
                         .append(MathUtils.intToBinaryString(i, qubitsNumber()))
                         .append(">");
             }
-        builder.append(")");
+        if (K != 1)
+            builder.append(")");
         return builder.toString();
     }
     public static Register matrixToRegister(Matrix m)

@@ -46,7 +46,7 @@ public class Matrix {
                 result[i][j] = 0;
         return new Matrix(1, result);
     }
-    public static Matrix hadamardMatrix()
+    public static Matrix HadamardMatrix()
     {
         return new Matrix(1/Math.sqrt(2), new double[][]{ {1,1}, {1, -1} });
     }

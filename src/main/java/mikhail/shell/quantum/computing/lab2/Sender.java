@@ -19,7 +19,7 @@ public class Sender {
         else
             q = Qubit.one();
         if (basis == 1)
-            q = Qubit.matrixToQubit(Matrix.hadamardMatrix().product(q));
+            q = Qubit.matrixToQubit(Matrix.HadamardMatrix().product(q));
         System.out.println("Сгенерирован кубит " + q);
         return q;
     }
